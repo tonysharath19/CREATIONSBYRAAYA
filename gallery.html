@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Gallery – Creations by Raaya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+<link rel="icon" href="Logo.jpg" type="image/jpeg">
+<style>
+  :root {
+    --primary: #274B9C;
+    --accent: #E8C26A;
+    --muted: #5A5A5A;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: #1B1B1B;
+    background: linear-gradient(135deg, #0a0015 0%, #1a0a2e 50%, #2d1b3d 100%);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+  }
+
+  /* Animated Background */
+  .bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* Header Styles */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 0, 21, 0.95);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: "Italianno", cursive;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+  }
+
+  .logo img {
+    height: 50px;
+    width: auto;
+    filter: brightness(1.2);
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  /* Desktop Navigation */
+  nav.desktop-nav {
+    display: flex;
+    gap: 24px;
+  }
+
+    nav.desktop-nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+  }
+
+  nav.desktop-nav a:hover {
+    color: var(--accent);
+  }
+
+  nav.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), #ffd700);
+    box-shadow: 0 0 10px var(--accent);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+
+  nav.desktop-nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    padding: 80px 5%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-content h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-family: "Rancho", cursive;
+    text-shadow: 0px 4px 20px rgba(232, 194, 106, 0.5);
+  }
+
+  .contact-content p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 14px 32px;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+  }
+
+  .btn.primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(39, 75, 156, 0.3);
+  }
+
+  .btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(39, 75, 156, 0.4);
+  }
+
+  /* Mobile Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(10, 0, 21, 0.98), rgba(26, 10, 46, 0.98));
+    backdrop-filter: blur(20px);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+    padding: 100px 30px 30px;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 15px 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mobile-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(232, 194, 106, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .mobile-menu a:hover::before {
+    left: 100%;
+  }
+
+  .mobile-menu a:hover {
+    background: rgba(232, 194, 106, 0.15);
+    transform: translateX(10px);
+    color: var(--accent);
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+  }
+
+  .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 140px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(232, 194, 106, 0.15) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0px 4px 20px rgba(232, 194, 106, 0.5);
+    margin-bottom: 20px;
+    font-family: "Rancho", cursive;
+    animation: fadeInUp 1s ease;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 700px;
+    animation: fadeInUp 1s ease 0.2s backwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Gallery Section */
+  .gallery-section {
+    padding: 60px 5% 120px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .gallery-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    columns: 4;
+    column-gap: 30px;
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    cursor: pointer;
+    animation: fadeInUp 0.8s ease backwards;
+    transition: all 0.4s ease;
+  }
+
+  .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+  .gallery-item:nth-child(2) { animation-delay: 0.15s; }
+  .gallery-item:nth-child(3) { animation-delay: 0.2s; }
+  .gallery-item:nth-child(4) { animation-delay: 0.25s; }
+  .gallery-item:nth-child(5) { animation-delay: 0.3s; }
+  .gallery-item:nth-child(6) { animation-delay: 0.35s; }
+  .gallery-item:nth-child(7) { animation-delay: 0.4s; }
+  .gallery-item:nth-child(8) { animation-delay: 0.45s; }
+  .gallery-item:nth-child(9) { animation-delay: 0.5s; }
+  .gallery-item:nth-child(10) { animation-delay: 0.55s; }
+  .gallery-item:nth-child(11) { animation-delay: 0.6s; }
+  .gallery-item:nth-child(12) { animation-delay: 0.65s; }
+  .gallery-item:nth-child(13) { animation-delay: 0.7s; }
+  .gallery-item:nth-child(14) { animation-delay: 0.75s; }
+  .gallery-item:nth-child(15) { animation-delay: 0.8s; }
+  .gallery-item:nth-child(16) { animation-delay: 0.85s; }
+  .gallery-item:nth-child(17) { animation-delay: 0.9s; }
+  .gallery-item:nth-child(18) { animation-delay: 0.95s; }
+  .gallery-item:nth-child(19) { animation-delay: 1.0s; }
+  .gallery-item:nth-child(20) { animation-delay: 1.05s; }
+  .gallery-item:nth-child(21) { animation-delay: 1.1s; }
+  .gallery-item:nth-child(22) { animation-delay: 1.15s; }
+  .gallery-item:nth-child(23) { animation-delay: 1.2s; }
+  .gallery-item:nth-child(24) { animation-delay: 1.25s; }
+  .gallery-item:nth-child(25) { animation-delay: 1.3s; }
+  .gallery-item:nth-child(26) { animation-delay: 1.35s; }
+  .gallery-item:nth-child(27) { animation-delay: 1.4s; }
+  .gallery-item:nth-child(28) { animation-delay: 1.45s; }
+  .gallery-item:nth-child(29) { animation-delay: 1.5s; }
+  .gallery-item:nth-child(30) { animation-delay: 1.55s; }
+  .gallery-item:nth-child(31) { animation-delay: 1.6s; }
+  .gallery-item:nth-child(32) { animation-delay: 1.65s; }
+  .gallery-item:nth-child(33) { animation-delay: 1.7s; }
+  .gallery-item:nth-child(34) { animation-delay: 1.75s; }
+  .gallery-item:nth-child(35) { animation-delay: 1.8s; }
+  .gallery-item:nth-child(36) { animation-delay: 1.85s; }
+  .gallery-item:nth-child(37) { animation-delay: 1.9s; }
+  .gallery-item:nth-child(38) { animation-delay: 1.95s; }
+
+  .gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(232, 194, 106, 0.2) 0%, rgba(39, 75, 156, 0.2) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    border-radius: 20px;
+  }
+
+  .gallery-item:hover::before {
+    opacity: 1;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(232, 194, 106, 0.3);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .lightbox.active {
+    display: flex;
+  }
+
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+  }
+
+  @keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 15px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    color: white;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .lightbox-prev {
+    left: -80px;
+  }
+
+  .lightbox-next {
+    right: -80px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(10, 0, 21, 0.8);
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Tablet Styles */
+  @media (max-width: 1024px) {
+    .gallery-container {
+      columns: 3;
+      column-gap: 25px;
+    }
+
+    .gallery-item {
+      margin-bottom: 25px;
+    }
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    header {
+      padding: 15px 5%;
+    }
+
+    .logo {
+      font-size: 2rem;
+    }
+
+    nav.desktop-nav {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .hero {
+      min-height: 50vh;
+      padding: 120px 5% 60px;
+    }
+
+    .gallery-container {
+      columns: 2;
+      column-gap: 20px;
+    }
+
+    .gallery-item {
+      margin-bottom: 20px;
+    }
+
+    .lightbox-prev {
+      left: 10px;
+    }
+
+    .lightbox-next {
+      right: 10px;
+    }
+
+    .lightbox-close {
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 1.8rem;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .hamburger span {
+      width: 25px;
+    }
+
+    .mobile-menu {
+      width: 260px;
+      padding: 90px 20px 20px;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      font-size: 1.2rem;
+      padding: 12px 15px;
+    }
+
+    .gallery-container {
+      columns: 1;
+      column-gap: 0;
+    }
+
+    .gallery-item {
+      max-width: 400px;
+      margin: 0 auto 20px;
+    }
+
+    .lightbox-nav {
+      width: 50px;
+      height: 50px;
+      font-size: 35px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="bg-animation" id="stars"></div>
+  <div class="menu-overlay"></div>
+
+  <header>
+    <a href="index.html" class="logo"><img src="Logo.jpg" alt="Logo"> Creations by Raaya</a>
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="aboutus.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="web-invites.html">Web-Invites</a>
+      <a href="products.html">Templates</a>
+      
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <nav class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="aboutus.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="web-invites.html">Web-Invites</a>
+    <a href="products.html">Templates</a>
+    
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Our Magical Gallery</h1>
+    <p>Explore our stunning collection of bespoke digital invitations, each crafted with passion and creativity.</p>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-container">
+      <div class="gallery-item" data-index="0">
+        <img src="GALLERY/WEDDING-1.jpg" alt="Wedding Invitation 1">
+      </div>
+      <div class="gallery-item" data-index="1">
+        <img src="GALLERY/WEDDING-2.jpg" alt="Wedding Invitation 2">
+      </div>
+      <div class="gallery-item" data-index="2">
+        <img src="GALLERY/Gorthala-Vinay-Wedding_Invite.jpg" alt="Vinay Wedding Invite">
+      </div>
+      <div class="gallery-item" data-index="3">
+        <img src="GALLERY/VINAY-WED-WTSAPP.png" alt="Vinay Wedding WhatsApp">
+      </div>
+      <div class="gallery-item" data-index="4">
+        <img src="GALLERY/VINAY-WEDDING-INSTA-STORY.jpg" alt="Vinay Wedding Insta Story">
+      </div>
+      <div class="gallery-item" data-index="5">
+        <img src="GALLERY/BIRTHDAY-1.jpg" alt="Birthday Invitation 1">
+      </div>
+      <div class="gallery-item" data-index="6">
+        <img src="GALLERY/BIRTHDAY-2.jpg" alt="Birthday Invitation 2">
+      </div>
+      <div class="gallery-item" data-index="7">
+        <img src="GALLERY/BABY-SHOWER-1.jpg" alt="Baby Shower Invitation 1">
+      </div>
+      <div class="gallery-item" data-index="8">
+        <img src="GALLERY/BABY-SHOWER-2.jpg" alt="Baby Shower Invitation 2">
+      </div>
+      <div class="gallery-item" data-index="9">
+        <img src="GALLERY/ENGAGEMENT-1.jpg" alt="Engagement Invitation 1">
+      </div>
+      <div class="gallery-item" data-index="10">
+        <img src="GALLERY/ENGAGEMENT-2.jpg" alt="Engagement Invitation 2">
+      </div>
+      <div class="gallery-item" data-index="11">
+        <img src="GALLERY/HOUSEWARMING-1.jpg" alt="Housewarming Invitation 1">
+      </div>
+      <div class="gallery-item" data-index="12">
+        <img src="GALLERY/HOUSEWARMING-2.jpg" alt="Housewarming Invitation 2">
+      </div>
+      <div class="gallery-item" data-index="13">
+        <img src="GALLERY/NAMING-CEREMONY-1.jpg" alt="Naming Ceremony Invitation 1">
+      </div>
+      <div class="gallery-item" data-index="14">
+        <img src="GALLERY/NAMING-CEREMONY-2.png" alt="Naming Ceremony Invitation 2">
+      </div>
+      <div class="gallery-item" data-index="15">
+        <img src="GALLERY/UPANAYANAM-2.png" alt="Upanayanam Invitation 2">
+      </div>
+      <div class="gallery-item" data-index="17">
+        <img src="GALLERY/BDAY-DISPLAY2.jpg" alt="Birthday Display 2">
+      </div>
+      <div class="gallery-item" data-index="19">
+        <img src="GALLERY/BS-DISPLAY3.jpg" alt="Baby Shower Display 3">
+      </div>
+      <div class="gallery-item" data-index="20">
+        <img src="GALLERY/ENG-DISPLAY1.jpg" alt="Engagement Display 1">
+      </div>
+      <div class="gallery-item" data-index="21">
+        <img src="GALLERY/ENG-DISPLAY2.jpg" alt="Engagement Display 2">
+      </div>
+      <div class="gallery-item" data-index="22">
+        <img src="GALLERY/ENG-DISPLAY3.jpg" alt="Engagement Display 3">
+      </div>
+      <div class="gallery-item" data-index="23">
+        <img src="GALLERY/final_card.jpg" alt="Final Card">
+      </div>
+      <div class="gallery-item" data-index="24">
+        <img src="GALLERY/HOUSE-DISPLAY2.jpg" alt="Housewarming Display 2">
+      </div>
+      <div class="gallery-item" data-index="25">
+        <img src="GALLERY/HOUSE-DISPLAY3.jpg" alt="Housewarming Display 3">
+      </div>
+      <div class="gallery-item" data-index="26">
+        <img src="GALLERY/NAMEC-DISPLAY1.jpg" alt="Naming Ceremony Display 1">
+      </div>
+      <div class="gallery-item" data-index="27">
+        <img src="GALLERY/NAMEC-DISPLAY2.jpg" alt="Naming Ceremony Display 2">
+      </div>
+      <div class="gallery-item" data-index="28">
+        <img src="GALLERY/NAMEC-DISPLAY3.jpg" alt="Naming Ceremony Display 3">
+      </div>
+      <div class="gallery-item" data-index="29">
+        <img src="GALLERY/UP-DISPLAY1.jpg" alt="Upanayanam Display 1">
+      </div>
+      <div class="gallery-item" data-index="30">
+        <img src="GALLERY/UP-DISPLAY2.jpg" alt="Upanayanam Display 2">
+      </div>
+      <div class="gallery-item" data-index="31">
+        <img src="GALLERY/UP-DISPLAY3.jpg" alt="Upanayanam Display 3">
+      </div>
+      <div class="gallery-item" data-index="32">
+        <img src="GALLERY/UP-DISPLAY4.jpg" alt="Upanayanam Display 4">
+      </div>
+      <div class="gallery-item" data-index="33">
+        <img src="GALLERY/UP-DISPLAY5.jpg" alt="Upanayanam Display 5">
+      </div>
+      <div class="gallery-item" data-index="34">
+        <img src="GALLERY/UP-DISPLAY6.jpg" alt="Upanayanam Display 6">
+      </div>
+      <div class="gallery-item" data-index="35">
+        <img src="GALLERY/WED-DISPLAY3.jpg" alt="Wedding Display 3">
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-content">
+      <h2>Ready to Create Something Magical?</h2>
+      <p>Love what you see? Let's bring your vision to life with a custom digital invitation that captures your unique story.</p>
+      <a href="contact.html" class="btn primary">Get in Touch</a>
+    </div>
+  </section>
+
+  <div class="lightbox">
+    <div class="lightbox-content">
+      <span class="lightbox-close">&times;</span>
+      <span class="lightbox-nav lightbox-prev">&#8249;</span>
+      <img src="" alt="Lightbox Image">
+      <span class="lightbox-nav lightbox-next">&#8250;</span>
+    </div>
+  </div>
+
+   <footer>© 2025 Creations by Raaya – Web-Invites & Digital Experiences</footer>
+
+  <script>
+    // Create stars animation
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const body = document.body;
+
+    function toggleMenu() {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+      body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', toggleMenu);
+    });
+
+    // Lightbox functionality
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox.querySelector('.lightbox-next');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const img = galleryItems[index].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+      body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      body.style.overflow = '';
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      const img = galleryItems[currentIndex].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      const img = galleryItems[currentIndex].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+    }
+
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNext.addEventListener('click', showNext);
+    lightboxPrev.addEventListener('click', showPrev);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+  </script>
+</body>
+</html>

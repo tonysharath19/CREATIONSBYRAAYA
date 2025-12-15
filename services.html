@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Our Services – Creations by Raaya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+<link rel="icon" href="Logo.jpg" type="image/jpeg">
+<style>
+  :root {
+    --primary: #274B9C;
+    --accent: #E8C26A;
+    --muted: #5A5A5A;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: #1B1B1B;
+    background: #0a0015;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Header Styles */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000000;
+    font-family: "Italianno", cursive;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+  }
+
+  .logo img {
+    height: 50px;
+    width: auto;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  /* Desktop Navigation */
+  nav.desktop-nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  nav.desktop-nav a {
+    text-decoration: none;
+    color: #1B1B1B;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+  }
+
+  nav.desktop-nav a:hover {
+    color: var(--primary);
+  }
+
+  nav.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4169E1, #6B8FFF);
+    box-shadow: 0 0 10px #4169E1;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+
+  nav.desktop-nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Mobile Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #1B1B1B;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(249, 249, 249, 0.98));
+    backdrop-filter: blur(20px);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    padding: 100px 30px 30px;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-menu a {
+    text-decoration: none;
+    color: #1B1B1B;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 15px 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mobile-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(65, 105, 225, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .mobile-menu a:hover::before {
+    left: 100%;
+  }
+
+  .mobile-menu a:hover {
+    background: rgba(39, 75, 156, 0.08);
+    transform: translateX(10px);
+    color: var(--primary);
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+  }
+
+  .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(253, 248, 255, 0.95) 0%, rgba(245, 238, 248, 0.95) 50%, rgba(237, 228, 242, 0.95) 100%);
+    padding: 140px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(232, 180, 188, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    color: #230a3c;
+    text-shadow: 0px 2px 8px rgba(179, 177, 76, 0.3);
+    margin-bottom: 30px;
+    font-family: "Rancho", cursive;
+    animation: fadeInUp 1s ease;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: #4a1a5e;
+    max-width: 800px;
+    animation: fadeInUp 1s ease 0.2s backwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Signature Service - Web Invites */
+  .signature-service {
+    padding: 120px 8%;
+    background: linear-gradient(135deg, #0f0a2e 0%, #1a0f3e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .signature-service::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1600&q=80') center/cover;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  .signature-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .signature-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #ffd700);
+    color: #0a0015;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px rgba(232, 194, 106, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .signature-content h2 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-family: "Rancho", cursive;
+    text-shadow: 0 4px 20px rgba(232, 194, 106, 0.3);
+  }
+
+  .signature-content p {
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.9;
+    margin-bottom: 25px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(232, 194, 106, 0.2);
+    padding: 35px 30px;
+    border-radius: 20px;
+    transition: all 0.4s ease;
+  }
+
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(232, 194, 106, 0.3);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;
+  }
+
+  .feature-card h3 {
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .feature-card p {
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+  }
+
+  /* Services Grid */
+  .services-section {
+    padding: 120px 8%;
+    background: linear-gradient(135deg, #fef9ff 0%, #f5f0fa 100%);
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .services-header h2 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #230a3c;
+    margin-bottom: 25px;
+    font-family: "Rancho", cursive;
+  }
+
+  .services-header p {
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    color: #4a1a5e;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .service-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 60px rgba(39, 75, 156, 0.2);
+  }
+
+  .service-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover .service-image {
+    transform: scale(1.1);
+  }
+
+  .service-image-container {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .service-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+  }
+
+  .service-content {
+    padding: 35px 30px;
+  }
+
+  .service-card h3 {
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    color: #230a3c;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .service-card p {
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    color: #4a1a5e;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .occasions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .occasion-tag {
+    background: linear-gradient(135deg, rgba(39, 75, 156, 0.1), rgba(65, 105, 225, 0.1));
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(39, 75, 156, 0.2);
+    text-align: center;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    padding: 80px 5%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, #fef5ff 0%, #ffe9f5 100%);
+  }
+
+  .contact-content h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #5d0020;
+    margin-bottom: 20px;
+    font-family: "Rancho", cursive;
+    text-shadow: 0px 4px 20px rgba(232, 180, 188, 0.5);
+  }
+
+  .contact-content p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: #8B1538;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #fef5ff 0%, #ffe9f5 100%);
+    padding: 120px 6%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(232, 180, 188, 0.15) 0%, transparent 70%);
+  }
+
+  .cta-section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    margin-bottom: 20px;
+    color: #5d0020;
+    font-weight: 700;
+  }
+
+  .cta-section p {
+    color: #8B1538;
+    margin-bottom: 35px;
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    max-width: 700px;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 16px 40px;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+  }
+
+  .btn.primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(39, 75, 156, 0.3);
+  }
+
+  .btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(39, 75, 156, 0.4);
+  }
+
+  .btn.gold {
+    background: linear-gradient(135deg, var(--accent), #ffd700);
+    color: #0a0015;
+    box-shadow: 0 4px 15px rgba(232, 194, 106, 0.4);
+    font-weight: 700;
+  }
+
+  .btn.gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(232, 194, 106, 0.5);
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+    background: #fff;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+  }
+
+  /* Center all headings */
+  h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+  }
+
+  /* Center all paragraphs */
+  p {
+    text-align: center;
+  }
+
+  /* Scroll Animation Styles */
+  .scroll-hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-slide-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-slide-left {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-slide-right {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-scale-in {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .scroll-hidden-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-hidden-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-hidden-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Stagger animation delays */
+  .scroll-delay-1 { transition-delay: 0.1s; }
+  .scroll-delay-2 { transition-delay: 0.2s; }
+  .scroll-delay-3 { transition-delay: 0.3s; }
+  .scroll-delay-4 { transition-delay: 0.4s; }
+  .scroll-delay-5 { transition-delay: 0.5s; }
+  .scroll-delay-6 { transition-delay: 0.6s; }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    header {
+      padding: 15px 5%;
+    }
+
+    .logo {
+      font-size: 2rem;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav.desktop-nav {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .hero {
+      min-height: 70vh;
+      padding: 120px 5% 60px;
+    }
+
+    .signature-service,
+    .services-section {
+      padding: 80px 5%;
+    }
+
+    .services-header {
+      margin-bottom: 50px;
+    }
+
+    .features-grid,
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .cta-section {
+      min-height: auto;
+      padding: 80px 5%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 1.8rem;
+    }
+
+    .hamburger span {
+      width: 25px;
+    }
+
+    .mobile-menu {
+      width: 260px;
+      padding: 90px 20px 20px;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      font-size: 1.2rem;
+      padding: 12px 15px;
+    }
+
+    .feature-card,
+    .service-content {
+      padding: 25px 20px;
+    }
+
+    .btn {
+      padding: 14px 32px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="menu-overlay"></div>
+
+  <header>
+    <a href="index.html" class="logo"><img src="Logo.jpg" alt="Logo"> Creations by Raaya</a>
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="aboutus.html">About</a>
+      <a href="web-invites.html">Web-Invites</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="products.html">Templates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <nav class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="aboutus.html">About</a>
+    <a href="web-invites.html">Web-Invites</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="products.html">Templates</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Crafting Extraordinary<br>Experiences</h1>
+    <p>From revolutionary web invitations to stunning digital designs, we transform your celebrations and brands into unforgettable visual stories.</p>
+  </section>
+
+  <!-- Signature Service -->
+  <section id="web-invites" class="signature-service">
+    <div class="signature-content">
+      <span class="signature-badge">🌟 WORLD'S FIRST INNOVATION</span>
+      <h2>Web-Invites: The Future of Invitations</h2>
+      <p>Forget bulky files, multiple attachments, and endless downloads. We've revolutionized the invitation experience with our signature Web-Invites — a seamless, all-in-one digital experience that your guests will love.</p>
+      <p>Instead of sending separate images, videos, PDFs, RSVP links, and location maps, everything is elegantly combined into a single, interactive web link. Your guests don't just read your invitation — they experience it. From immersive galleries to integrated maps and instant RSVP, it's invitation reimagined for the modern age.</p>
+      
+      <!--div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🔗</span>
+          <h3>One Link, Everything Included</h3>
+          <p>Share a single elegant URL that contains your invitation, event details, photo galleries, videos, location maps, and RSVP — all in one place.</p>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">📱</span>
+          <h3>No Downloads Required</h3>
+          <p>Works instantly on any device, any browser. No apps to install, no files to download. Just click and experience.</p>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">🎨</span>
+          <h3>Fully Interactive</h3>
+          <p>Stunning animations, smooth transitions, and engaging interactions that make your invitation come alive.</p>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">⚡</span>
+          <h3>Instant Updates</h3>
+          <p>Need to change venue or time? Update it once, and everyone sees it instantly. No resending required.</p>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">🌍</span>
+          <h3>Global Accessibility</h3>
+          <p>Share with guests anywhere in the world. Works seamlessly across all countries, time zones, and devices.</p>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">💚</span>
+          <h3>Eco-Friendly & Modern</h3>
+          <p>Zero waste, zero printing, zero hassle. Embrace the future while being kind to the planet.</p>
+        </div>
+      </div-->
+      
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="web-invites.html" class="btn gold">Learn more about Web-Invites</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Services -->
+  <section class="services-section">
+    <div class="services-header">
+      <h2 class="scroll-hidden">Our Complete Services</h2>
+      <p class="scroll-hidden scroll-delay-1">Beyond our signature Web-Invites, we offer a comprehensive suite of design services to elevate every aspect of your celebrations and brand.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- Digital Invitation Cards -->
+      <div class="service-card scroll-hidden scroll-delay-2">
+        <div class="service-image-container">
+          <img src="https://images.unsplash.com/photo-1764385827388-2560c0cdc1e9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGludml0YXRpb24lMjBjYXJkc3xlbnwwfHwwfHx8MA%3D%3D" alt="Digital Invitation Cards" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Digital Invitation<br>Cards</h3>
+          <p>For those who prefer the classic approach, we create stunning traditional digital invitation cards that can be easily shared via WhatsApp, email, or social media. Fully customizable for every occasion.</p>
+          <!--div class="occasions-list">
+            <span class="occasion-tag">Weddings</span>
+            <span class="occasion-tag">Birthdays</span>
+            <span class="occasion-tag">Engagements</span>
+            <span class="occasion-tag">Anniversaries</span>
+            <span class="occasion-tag">Receptions</span>
+            <span class="occasion-tag">Haldi</span>
+            <span class="occasion-tag">Sangeet</span>
+            <span class="occasion-tag">Baby Showers</span>
+            <span class="occasion-tag">Naming Ceremonies</span>
+            <span class="occasion-tag">House Warmings</span>
+            <span class="occasion-tag">Family Events</span>
+            <span class="occasion-tag">Upanayanams</span>
+            <span class="occasion-tag">Corporate Events</span>
+            <span class="occasion-tag">Baptisms</span>
+            <span class="occasion-tag">Nikkah</span>
+            <span class="occasion-tag">Other Occasions</span>
+          </div-->
+        </div>
+      </div>
+
+      <!-- Welcome Boards -->
+      <div class="service-card scroll-hidden scroll-delay-3">
+        <div class="service-image-container">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80" alt="Welcome Boards" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Welcome Board Designs</h3>
+          <p>Make a grand first impression with our beautifully designed welcome boards. We provide stunning digital designs ready for printing, perfect for greeting your guests in style at any event entrance.</p>
+        </div>
+      </div>
+
+      <!-- Social Media Content -->
+      <div class="service-card scroll-hidden scroll-delay-4">
+        <div class="service-image-container">
+          <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80" alt="Social Media Design" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Instagram & Social Media Design</h3>
+          <p>Elevate your social media presence with professionally crafted content. We create eye-catching Instagram posts, story templates, reels, video ads, and custom post templates that engage and convert.</p>
+        </div>
+      </div>
+
+      <!-- Print Advertising -->
+      <div class="service-card scroll-hidden scroll-delay-5">
+        <div class="service-image-container">
+          <img src="https://images.unsplash.com/photo-1563906267088-b029e7101114?w=800&q=80" alt="Flexes and Banners" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Flexes & Banner Designs</h3>
+          <p>Command attention with bold, professional flex and banner designs for advertising, events, and promotions. Print-ready files optimized for large format printing with stunning visual impact.</p>
+        </div>
+      </div>
+
+      <!-- Websites -->
+      <div class="service-card scroll-hidden scroll-delay-6">
+        <div class="service-image-container">
+          <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80" alt="Website Development" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Micro & Business Websites</h3>
+          <p>Establish your digital presence with our custom-designed websites for small to medium businesses. Modern, responsive, and optimized for performance, we create websites that convert visitors into customers.</p>
+        </div>
+      </div>
+
+      <!-- Custom Projects -->
+      <div class="service-card scroll-hidden scroll-delay-6">
+        <div class="service-image-container">
+          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80" alt="Custom Design Projects" class="service-image">
+        </div>
+        <div class="service-content">
+          <h3>Custom Design<br>Projects</h3>
+          <p>Have a unique vision? We specialize in bringing creative ideas to life. From brand identity to bespoke digital experiences, we transform your concepts into stunning visual realities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Experience the Future of Design</h2>
+    <p>Join countless satisfied clients who have transformed their events and brands with our cutting-edge digital solutions.</p>
+    <a href="contact.html" class="btn gold">Start Your Project</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+     © 2025 Creations by Raaya – Web-Invites & Digital Experiences
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    });
+
+    menuOverlay.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+    });
+
+    // Scroll Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('scroll-fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with scroll-hidden class
+    document.querySelectorAll('.scroll-hidden').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

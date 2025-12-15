@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Web-Invites – Creations by Raaya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+<link rel="icon" href="Logo.jpg" type="image/jpeg">
+<style>
+  :root {
+    --primary: #274B9C;
+    --accent: #E8C26A;
+    --muted: #5A5A5A;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: #1B1B1B;
+    background: #0a0015;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Header Styles */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000000;
+    font-family: "Italianno", cursive;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+  }
+
+  .logo img {
+    height: 50px;
+    width: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  .logo:hover img {
+    transform: rotate(5deg);
+  }
+
+  nav.desktop-nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  nav.desktop-nav a {
+    text-decoration: none;
+    color: #1B1B1B;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+  }
+
+  nav.desktop-nav a:hover {
+    color: var(--primary);
+  }
+
+  nav.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4169E1, #6B8FFF);
+    box-shadow: 0 0 10px #4169E1;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+
+  nav.desktop-nav a:hover::after {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #1B1B1B;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(249, 249, 249, 0.98));
+    backdrop-filter: blur(20px);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    padding: 100px 30px 30px;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-menu a {
+    text-decoration: none;
+    color: #1B1B1B;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 15px 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mobile-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(65, 105, 225, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .mobile-menu a:hover::before {
+    left: 100%;
+  }
+
+  .mobile-menu a:hover {
+    background: rgba(39, 75, 156, 0.08);
+    transform: translateX(10px);
+    color: var(--primary);
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+  }
+
+  .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(253, 248, 255, 0.95) 0%, rgba(245, 238, 248, 0.95) 50%, rgba(237, 228, 242, 0.95) 100%);
+    padding: 140px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(232, 180, 188, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    color: #230a3c;
+    text-shadow: 0px 2px 8px rgba(179, 177, 76, 0.3);
+    margin-bottom: 30px;
+    font-family: "Rancho", cursive;
+    animation: fadeInUp 1s ease;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: #4a1a5e;
+    max-width: 800px;
+    animation: fadeInUp 1s ease 0.2s backwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Redesigned Web-Invites Spotlight Section */
+  .web-invites-spotlight {
+    padding: 120px 8%;
+    background: linear-gradient(135deg, #0f0a2e 0%, #1a0f3e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(232, 194, 106, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(65, 105, 225, 0.08) 0%, transparent 50%);
+    animation: shimmer 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .spotlight-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .spotlight-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .spotlight-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #ffd700);
+    color: #0a0015;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px rgba(232, 194, 106, 0.4);
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 8px 30px rgba(232, 194, 106, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 12px 40px rgba(232, 194, 106, 0.6); }
+  }
+
+  .spotlight-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-family: "Rancho", cursive;
+    text-shadow: 0 4px 20px rgba(232, 194, 106, 0.3);
+    animation: titleGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes titleGlow {
+    0%, 100% { text-shadow: 0 4px 20px rgba(232, 194, 106, 0.3); }
+    50% { text-shadow: 0 4px 30px rgba(232, 194, 106, 0.6); }
+  }
+
+  .spotlight-description {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.9;
+    margin-bottom: 25px;
+  }
+
+  /* New Grid Layout for Features */
+  .spotlight-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  .spotlight-feature {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(232, 194, 106, 0.2);
+    padding: 35px;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .spotlight-feature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(232, 194, 106, 0.1), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .spotlight-feature:hover::before {
+    left: 100%;
+  }
+
+  .spotlight-feature:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--accent);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(232, 194, 106, 0.3), inset 0 1px 0 rgba(232, 194, 106, 0.2);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+    animation: iconBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .spotlight-feature:hover .feature-icon {
+    animation: iconBounce 0.6s ease-in-out;
+  }
+
+  .spotlight-feature h3 {
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+
+  .spotlight-feature p {
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Event Sections - CENTERED LAYOUT */
+  .event-section {
+    padding: 100px 8%;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .event-section.wedding-1 {
+    background: linear-gradient(135deg, rgba(255, 240, 245, 0.95) 0%, rgba(255, 230, 240, 0.95) 100%);
+  }
+
+  .event-section.wedding-2 {
+    background: linear-gradient(135deg, rgba(245, 235, 255, 0.95) 0%, rgba(235, 220, 255, 0.95) 100%);
+  }
+
+  .event-section.birthday {
+    background: linear-gradient(135deg, rgba(255, 250, 230, 0.95) 0%, rgba(255, 245, 210, 0.95) 100%);
+  }
+
+  .event-section.engagement {
+    background: linear-gradient(135deg, rgba(240, 255, 240, 0.95) 0%, rgba(220, 255, 240, 0.95) 100%);
+  }
+
+  .event-section.housewarming {
+    background: linear-gradient(135deg, rgba(255, 245, 235, 0.95) 0%, rgba(255, 235, 215, 0.95) 100%);
+  }
+
+  .event-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .event-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .event-section.visible .event-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .event-content h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 500;
+    margin-bottom: 30px;
+    font-family: "Rancho", cursive;
+    line-height: 1.2;
+    transition: all 0.3s ease;
+  }
+
+  .event-section.wedding-1 .event-content h2,
+  .event-section.wedding-2 .event-content h2 {
+    color: #8B1538;
+  }
+
+  .event-section.birthday .event-content h2 {
+    color: #D97706;
+  }
+
+  .event-section.engagement .event-content h2 {
+    color: #059669;
+  }
+
+  .event-section.housewarming .event-content h2 {
+    color: #DC2626;
+  }
+
+  .event-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    animation: imageFloat 4s ease-in-out infinite;
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 30px;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  .event-section.visible .event-image {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.2s;
+  }
+
+  .event-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  }
+
+  .event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .event-image:hover img {
+    transform: scale(1.1);
+  }
+
+  @keyframes imageFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-15px) scale(1); }
+  }
+
+  .event-image:hover {
+    animation: none;
+  }
+
+  .event-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+    transition: opacity 0.3s ease;
+  }
+
+  .event-image:hover::after {
+    opacity: 0;
+  }
+
+  .event-content > p {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #4a1a5e;
+    max-width: 800px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .event-section.visible .event-content > p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+  }
+
+  .event-features {
+    margin: 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .event-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    transition: transform 0.3s ease;
+    text-align: left;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.5s ease;
+  }
+
+  .event-section.visible .event-feature {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .event-section.visible .event-feature:nth-child(1) { transition-delay: 0.6s; }
+  .event-section.visible .event-feature:nth-child(2) { transition-delay: 0.7s; }
+  .event-section.visible .event-feature:nth-child(3) { transition-delay: 0.8s; }
+  .event-section.visible .event-feature:nth-child(4) { transition-delay: 0.9s; }
+  .event-section.visible .event-feature:nth-child(5) { transition-delay: 1s; }
+
+  .event-feature:hover {
+    transform: translateX(10px);
+  }
+
+  .feature-check {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .event-feature:hover .feature-check {
+    transform: scale(1.2) rotate(360deg);
+  }
+
+  .feature-check.wedding { color: #8B1538; }
+  .feature-check.birthday { color: #D97706; }
+  .feature-check.engagement { color: #059669; }
+  .feature-check.housewarming { color: #DC2626; }
+
+  .feature-text {
+    font-size: 1rem;
+    color: #4a1a5e;
+    line-height: 1.6;
+  }
+
+  .disclaimer {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #666;
+    margin: 15px 0;
+    text-align: center;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .event-section.visible .disclaimer {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.1s;
+  }
+
+  .btn {
+    padding: 16px 40px;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    display: inline-block;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    border: none;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  .event-section.visible .btn {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 1.2s;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  .btn:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn.wedding {
+    background: linear-gradient(135deg, #8B1538, #C41E3A);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(139, 21, 56, 0.4);
+  }
+
+  .btn.wedding:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(139, 21, 56, 0.6);
+  }
+
+  .btn.birthday {
+    background: linear-gradient(135deg, #D97706, #F59E0B);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+  }
+
+  .btn.birthday:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
+  }
+
+  .btn.engagement {
+    background: linear-gradient(135deg, #059669, #10B981);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+  }
+
+  .btn.engagement:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(5, 150, 105, 0.6);
+  }
+
+  .btn.housewarming {
+    background: linear-gradient(135deg, #DC2626, #EF4444);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+  }
+
+  .btn.housewarming:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6);
+  }
+
+  .btn.gold {
+    background: linear-gradient(135deg, var(--accent), #ffd700);
+    color: #0a0015;
+    box-shadow: 0 4px 15px rgba(232, 194, 106, 0.4);
+    font-weight: 700;
+  }
+
+  .btn.gold:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(232, 194, 106, 0.6);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f0a2e 0%, #1a0f3e 100%);
+    padding: 120px 6%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(232, 194, 106, 0.1) 0%, transparent 70%);
+  }
+
+  .cta-section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: 700;
+    animation: fadeInUp 0.8s ease;
+  }
+
+  .cta-section p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 35px;
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    max-width: 700px;
+    animation: fadeInUp 0.8s ease 0.2s backwards;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+    background: #fff;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+  }
+
+  /* Responsive - Mobile View */
+  @media (max-width: 768px) {
+    header {
+      padding: 15px 5%;
+    }
+
+    .logo {
+      font-size: 2rem;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav.desktop-nav {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .hero {
+      min-height: 70vh;
+      padding: 120px 5% 60px;
+    }
+
+    .web-invites-spotlight {
+      padding: 80px 5%;
+    }
+
+    .spotlight-header {
+      margin-bottom: 50px;
+    }
+
+    .spotlight-features {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .spotlight-feature {
+      padding: 25px 20px;
+    }
+
+    .event-section {
+      padding: 60px 5%;
+    }
+
+    .event-container {
+      gap: 30px;
+    }
+
+    .event-image {
+      max-width: 320px;
+      margin-bottom: 20px;
+    }
+
+    .event-feature {
+      max-width: 100%;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      width: 100%;
+      max-width: 300px;
+      margin: 15px auto 0;
+    }
+
+    .disclaimer {
+      font-size: 0.75rem;
+      padding: 0 10px;
+    }
+
+    .cta-section {
+      min-height: auto;
+      padding: 80px 5%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 1.8rem;
+    }
+
+    .logo img {
+      height: 35px;
+    }
+
+    .hamburger span {
+      width: 25px;
+    }
+
+    .mobile-menu {
+      width: 260px;
+      padding: 90px 20px 20px;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      font-size: 1.2rem;
+      padding: 12px 15px;
+    }
+
+    .spotlight-badge {
+      font-size: 0.85rem;
+      padding: 10px 20px;
+    }
+
+    .spotlight-feature {
+      padding: 20px 15px;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+    }
+
+    .event-content h2 {
+      font-size: 1.8rem;
+    }
+
+    .event-image {
+      max-width: 280px;
+    }
+
+    .event-features {
+      gap: 12px;
+    }
+
+    .feature-check {
+      font-size: 1.3rem;
+    }
+
+    .feature-text {
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      font-size: 0.95rem;
+    }
+
+    .disclaimer {
+      font-size: 0.7rem;
+    }
+  }
+
+  /* Smooth Scroll Behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+</head>
+<body>
+  <div class="menu-overlay"></div>
+
+  <header>
+    <a href="index.html" class="logo"><img src="Logo.jpg" alt="Logo"> Creations by Raaya</a>
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="aboutus.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="products.html">Templates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <nav class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="aboutus.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="products.html">Templates</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Your Invitations,<br>Reimagined</h1>
+    <p>Welcome to the future of digital celebrations. Experience Web-Invites — the all-in-one platform that transforms how the world receives your invitations.</p>
+  </section>
+
+  <!-- Redesigned Web-Invites Spotlight -->
+  <section class="web-invites-spotlight">
+    <div class="spotlight-background"></div>
+    <div class="spotlight-content">
+      <div class="spotlight-header">
+        <span class="spotlight-badge">✨ Welcome To The Future of Digital Invitations</span>
+        <h2 class="spotlight-title">Experience the Magic of <br> Web-Invites</h2>
+        
+        <p class="spotlight-description">
+          Imagine sending an invitation that captivates your guests from the very first click. Web-Invites isn't just an invitation – it's an immersive digital experience that brings your event to life before it even begins.
+        </p>
+
+        <p class="spotlight-description">
+          Our platform offers unparalleled flexibility, allowing you to embed photos, videos, music, interactive timelines, and real-time RSVP tracking all within a single, elegant link.
+        </p>
+      </div>
+
+      <div class="spotlight-features">
+        <div class="spotlight-feature">
+          <span class="feature-icon">🌟</span>
+          <h3>Instant Engagement</h3>
+          <p>Guests experience your event's vibe the moment they click, with animations, music, and interactive elements that set the perfect tone.</p>
+        </div>
+        
+        <div class="spotlight-feature">
+          <span class="feature-icon">📊</span>
+          <h3>Real-Time Analytics</h3>
+          <p>Track RSVPs in real-time. Know exactly who's attending.</p>
+        </div>
+        
+        <div class="spotlight-feature">
+          <span class="feature-icon">🎨</span>
+          <h3>Fully Customizable</h3>
+          <p>Choose from hundreds of templates or create your own. Match your invitation perfectly to your event's theme.</p>
+        </div>
+        
+        <div class="spotlight-feature">
+          <span class="feature-icon">🔐</span>
+          <h3>Secure & Private</h3>
+          <p>We provide safe and secure HTTPS links which ensure safe experience to your invited guests.</p>
+        </div>
+        
+        <div class="spotlight-feature">
+          <span class="feature-icon">📱</span>
+          <h3>Mobile-First Design</h3>
+          <p>Made for mobile devices – smartphones, tablets. Full responsive optimization included.</p>
+        </div>
+
+        <div class="spotlight-feature">
+          <span class="feature-icon">🗺️</span>
+          <h3>Interactive Maps</h3>
+          <p>Embed detailed venue locations, and directions powered by Google Maps. Guests navigate with ease and confidence.</p>
+        </div>
+
+        <div class="spotlight-feature">
+          <span class="feature-icon">🎬</span>
+          <h3>Media Integration</h3>
+          <p>Embed videos, music, photo galleries, and more. Create a multimedia experience your guests won't forget.</p>
+        </div>
+
+        <div class="spotlight-feature">
+          <span class="feature-icon">⚡</span>
+          <h3>Lightning Fast</h3>
+          <p>Optimized performance ensures your invites load instantly. No lag, no buffering, just pure elegance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wedding Invitation 1 -->
+  <section class="event-section wedding-1">
+    <div class="event-container">
+      <div class="event-content">
+        <h2>Vinay & Gowthami's Wedding</h2>
+        
+        <div class="event-image">
+          <img src="COVER/wedding1.png" alt="Wedding Web-Invite">
+        </div>
+        
+        <p>Celebrate your love story with a Web-Invite that captures every magical moment. From pre-wedding festivities to the grand celebration, create an unforgettable digital experience for all your guests.</p>
+        
+        <div class="event-features">
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Stunning pre-wedding photo galleries and memories</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Complete wedding timeline with all ceremonies and receptions</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Interactive location maps for each venue</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Personalized welcome video from the couple</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Instant RSVP tracking and guest management</span>
+          </div>
+        </div>
+        
+        <p class="disclaimer">ALL DEMO WEB-INVITES ARE MADE FOR MOBILE! REQUESTING TO VIEW INVITES IN MOBILE DEVICES FOR BETTER VISUAL EXPERIENCE</p>
+        
+        <a href="https://vinay-gowthami-wedding-invitation.onrender.com" class="btn wedding" target="_blank"><span>View Demo</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Birthday Celebration -->
+  <section class="event-section birthday">
+    <div class="event-container">
+      <div class="event-content">
+        <h2>🎉Tushar's Birthday Bash</h2>
+
+        <div class="event-image">
+          <img src="COVER/birthday.png" alt="Birthday Web-Invite">
+        </div>
+
+        <p>Make birthdays unforgettable with a vibrant Web-Invite that radiates joy and celebration. Share the excitement with loved ones through an interactive, engaging digital experience.</p>
+
+        <div class="event-features">
+          <div class="event-feature">
+            <span class="feature-check birthday">✓</span>
+            <span class="feature-text">Colorful countdown timer to build anticipation</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check birthday">✓</span>
+            <span class="feature-text">Photo gallery showcasing precious birthday moments</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check birthday">✓</span>
+            <span class="feature-text">Video messages from friends and family</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check birthday">✓</span>
+            <span class="feature-text">Game ideas and entertainment details with venue map</span>
+          </div>
+        </div>
+        
+        <p class="disclaimer">ALL DEMO WEB-INVITES ARE MADE FOR MOBILE! REQUESTING TO VIEW INVITES IN MOBILE DEVICES FOR BETTER VISUAL EXPERIENCE</p>
+        
+        <a href="https://birthday-demo.onrender.com" class="btn birthday" target="_blank"><span>View Demo</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagement Celebration -->
+  <section class="event-section engagement">
+    <div class="event-container">
+      <div class="event-content">
+        <h2>Geetha & Ashok's Engagement</h2>
+        
+        <div class="event-image">
+          <img src="COVER/Engagement.png" alt="Engagement Web-Invite">
+        </div>
+        
+        <p>Announce your engagement in style with a Web-Invite that tells your unique love story. Share the joy and excitement with everyone as you embark on this beautiful new chapter.</p>
+        
+        <div class="event-features">
+          <div class="event-feature">
+            <span class="feature-check engagement">✓</span>
+            <span class="feature-text">Your couple's story with photo timeline</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check engagement">✓</span>
+            <span class="feature-text">Details about engagement events</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check engagement">✓</span>
+            <span class="feature-text">Interactive engagement photo gallery & Videos</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check engagement">✓</span>
+            <span class="feature-text">Message board for guests to share wishes with location map</span>
+          </div>
+        </div>
+        
+        <p class="disclaimer">ALL DEMO WEB-INVITES ARE MADE FOR MOBILE! REQUESTING TO VIEW INVITES IN MOBILE DEVICES FOR BETTER VISUAL EXPERIENCE</p>
+        
+        <a href="https://ashok-geetha-engagement.onrender.com" class="btn engagement" target="_blank"><span>View Demo</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wedding Invitation 2 -->
+  <section class="event-section wedding-1">
+    <div class="event-container">
+      <div class="event-content">
+        <h2>Ashok & Geetha's Wedding</h2>
+
+        <div class="event-image">
+          <img src="COVER/wedding2.png" alt="Wedding Web-Invite">
+        </div>
+
+        <p>Celebrate your love story with a Web-Invite that captures every magical moment. From pre-wedding festivities to the grand celebration, create an unforgettable digital experience for all your guests.</p>
+
+        <div class="event-features">
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Stunning pre-wedding photo galleries and memories</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Complete wedding timeline with all ceremonies and receptions</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Interactive location maps for each venue</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Personalized welcome video from the couple</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Instant RSVP tracking and guest management</span>
+          </div>
+        </div>
+
+        <p class="disclaimer">ALL DEMO WEB-INVITES ARE MADE FOR MOBILE! REQUESTING TO VIEW INVITES IN MOBILE DEVICES FOR BETTER VISUAL EXPERIENCE</p>
+
+        <a href="https://ashok-geetha-marriage-invite.onrender.com" class="btn wedding" target="_blank"><span>View Demo</span></a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Housewarming Celebration -->
+  <section class="event-section housewarming">
+    <div class="event-container">
+      <div class="event-content">
+        <h2>Housewarming Celebration</h2>
+        
+        <div class="event-image">
+          <img src="COVER/house.png" alt="Housewarming Web-Invite">
+        </div>
+        
+        <p>Welcome your loved ones to your new home with a warm and inviting Web-Invite. Share virtual tours, celebration plans, and all the details to make your housewarming memorable.</p>
+        
+        <div class="event-features">
+          <div class="event-feature">
+            <span class="feature-check housewarming">✓</span>
+            <span class="feature-text">Virtual tour of your new home</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check housewarming">✓</span>
+            <span class="feature-text">Before & after transformation gallery</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check housewarming">✓</span>
+            <span class="feature-text">Celebration details and theme preview with location map</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check housewarming">✓</span>
+            <span class="feature-text">Interactive directions with parking and transit info</span>         
+          </div>
+        </div>
+        
+        <p class="disclaimer">ALL DEMO WEB-INVITES ARE MADE FOR MOBILE! REQUESTING TO VIEW INVITES IN MOBILE DEVICES FOR BETTER VISUAL EXPERIENCE</p>
+        
+        <a href="https://house-warming-demo.onrender.com" class="btn housewarming" target="_blank"><span>View Demo</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Anniversary -->
+  <section class="event-section wedding-1">
+    <div class="event-container">
+      <div class="event-content">
+        <h2>Manoj & Kavya's Anniversary</h2>
+
+        <div class="event-image">
+          <img src="COVER/Anniversary.png" alt="Anniversary Web-Invite">
+        </div>
+
+        <p>Celebrate milestone moments with a Web-Invite that honors your journey together. Share your story, memories, and future plans with loved ones in an elegant digital format.</p>
+
+        <div class="event-features">
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Beautiful journey timeline with cherished memories</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Anniversary celebration details and schedule</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Interactive photo and video galleries</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Message wall for guests to share wishes</span>
+          </div>
+          <div class="event-feature">
+            <span class="feature-check wedding">✓</span>
+            <span class="feature-text">Venue location with easy navigation</span>
+          </div>
+        </div>
+
+        <p class="disclaimer">ALL DEMO WEB-INVITES ARE MADE FOR MOBILE! REQUESTING TO VIEW INVITES IN MOBILE DEVICES FOR BETTER VISUAL EXPERIENCE</p>
+
+        <a href="https://www-kavya-manoj-anniversary.onrender.com" class="btn wedding" target="_blank"><span>View Demo</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Ready to Create Your Perfect Web-Invite?</h2>
+    <p>Transform your celebrations into unforgettable digital experiences. Let us craft a Web-Invite that wows your guests and makes your event truly magical.</p>
+    <a href="contact.html" class="btn gold"><span>Start Your Web-Invite Today</span></a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Creations by Raaya – Web-Invites & Digital Experiences</p>
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+    });
+
+    menuOverlay.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Enhanced Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.event-section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

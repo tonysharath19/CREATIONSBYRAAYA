@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>About Us – Creations by Raaya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+<link rel="icon" href="Logo.jpg" type="image/jpeg">
+<style>
+  :root {
+    --primary: #274B9C;
+    --accent: #E8C26A;
+    --muted: #5A5A5A;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: #1B1B1B;
+    background: linear-gradient(135deg, #fffefc 0%, #f9f9f9 100%);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Header Styles */
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000000;
+    font-family: "Italianno", cursive;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+  }
+
+  .logo img {
+    height: 50px;
+    width: auto;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  /* Desktop Navigation */
+  nav.desktop-nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  nav.desktop-nav a {
+    text-decoration: none;
+    color: #1B1B1B;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+  }
+
+  nav.desktop-nav a:hover {
+    color: var(--primary);
+  }
+
+  nav.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4169E1, #6B8FFF);
+    box-shadow: 0 0 10px #4169E1;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+
+  nav.desktop-nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Mobile Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #1B1B1B;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(249, 249, 249, 0.98));
+    backdrop-filter: blur(20px);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    padding: 100px 30px 30px;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-menu a {
+    text-decoration: none;
+    color: #1B1B1B;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 15px 20px;
+    border-radius: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mobile-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(65, 105, 225, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .mobile-menu a:hover::before {
+    left: 100%;
+  }
+
+  .mobile-menu a:hover {
+    background: rgba(39, 75, 156, 0.08);
+    transform: translateX(10px);
+    color: var(--primary);
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+  }
+
+  .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(253, 248, 255, 0.95) 0%, rgba(245, 238, 248, 0.95) 50%, rgba(237, 228, 242, 0.95) 100%);
+    padding: 140px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(232, 180, 188, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    color: #230a3c;
+    text-shadow: 0px 2px 8px rgba(179, 177, 76, 0.3);
+    margin-bottom: 30px;
+    font-family: "Rancho", cursive;
+    animation: fadeInUp 1s ease;
+    line-height: 1.2;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Story Section */
+  .story-section {
+    padding: 120px 8%;
+    background: linear-gradient(135deg, #fef9ff 0%, #f5f0fa 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(232, 194, 106, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .story-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .story-intro {
+    text-align: center;
+    margin-bottom: 80px;
+    animation: fadeInUp 1s ease;
+  }
+
+  .story-intro h2 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #230a3c;
+    margin-bottom: 25px;
+    font-family: "Rancho", cursive;
+  }
+
+  .story-intro p {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: #4a1a5e;
+    line-height: 1.9;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Value Cards */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .value-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 45px 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .value-card:nth-child(1) {
+    animation: fadeInLeft 1s ease backwards;
+    animation-delay: 0.1s;
+  }
+  .value-card:nth-child(2) {
+    animation: fadeInUp 1s ease backwards;
+    animation-delay: 0.2s;
+  }
+  .value-card:nth-child(3) {
+    animation: fadeInRight 1s ease backwards;
+    animation-delay: 0.3s;
+  }
+
+  .value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(39, 75, 156, 0.15);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .value-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary), #4169E1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 25px;
+    box-shadow: 0 8px 25px rgba(39, 75, 156, 0.3);
+    position: relative;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+
+  .value-icon:hover {
+    transform: scale(1.1);
+  }
+
+  .value-card h3 {
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
+    color: #230a3c;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .value-card p {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    color: #4a1a5e;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  /* Approach Section */
+  .approach-section {
+    padding: 120px 8%;
+    background: linear-gradient(135deg, #e8f4ff 0%, #d4e9ff 100%);
+  }
+
+  .approach-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .approach-header {
+    text-align: center;
+    margin-bottom: 80px;
+    animation: fadeInUp 1s ease;
+  }
+
+  .approach-header h2 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #003D7A;
+    margin-bottom: 25px;
+    font-family: "Rancho", cursive;
+  }
+
+  .approach-header p {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    color: #004A94;
+    line-height: 1.9;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .approach-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+  }
+
+  .feature-item {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 35px 30px;
+    border-radius: 18px;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .feature-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 12px 40px rgba(39, 75, 156, 0.15);
+    border-left-width: 6px;
+  }
+
+  .feature-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+
+  .feature-number:hover {
+    transform: scale(1.1);
+  }
+
+  .feature-item h3 {
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    color: #003D7A;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .feature-item p {
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    color: #004A94;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #f48ad2 0%, #ffe9f5 100%);
+    padding: 120px 6%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(232, 180, 188, 0.1) 0%, transparent 70%);
+  }
+
+  .cta-section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    margin-bottom: 20px;
+    color: #5d0020;
+    font-weight: 700;
+  }
+
+  .cta-section p {
+    color: #8B1538;
+    margin-bottom: 30px;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    max-width: 700px;
+  }
+
+  /* Buttons */
+
+  .cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.cta-buttons .btn {
+  margin: 0;
+}
+
+  .btn {
+    padding: 14px 32px;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+  }
+
+  .btn.primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(39, 75, 156, 0.3);
+  }
+
+  .btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(39, 75, 156, 0.4);
+  }
+
+  .btn.secondary {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .btn.secondary:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-3px);
+  }
+
+  .btn.secondary.back-btn {
+    position:absolute;
+    top: 110px;
+    left: 20px;
+    z-index: 1001;
+    border: none;
+    background: transparent;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+    background: #fff;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    header {
+      padding: 15px 5%;
+      justify-content: space-between;
+    }
+
+    .back-btn {
+      left: 5%;
+    }
+
+    .logo {
+      flex: none;
+    }
+
+    .hamburger {
+      display: flex;
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    nav.desktop-nav {
+      display: none;
+    }
+
+    .hero {
+      min-height: 70vh;
+      padding: 120px 5% 60px;
+    }
+
+    .story-section,
+    .approach-section {
+      padding: 80px 5%;
+    }
+
+    .story-intro,
+    .approach-header {
+      margin-bottom: 50px;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .approach-features {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px) translateX(0);
+    }
+
+    .cta-section {
+      min-height: auto;
+      padding: 80px 5%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 1.8rem;
+    }
+
+    .hamburger span {
+      width: 25px;
+    }
+
+    .mobile-menu {
+      width: 260px;
+      padding: 90px 20px 20px;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      font-size: 1.2rem;
+      padding: 12px 15px;
+    }
+
+    .value-card,
+    .feature-item {
+      padding: 30px 25px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="menu-overlay"></div>
+
+  <header>
+    <a href="index.html" class="logo"><img src="Logo.jpg" alt="Logo"> Creations by Raaya</a>
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="web-invites.html">Web-Invites</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="products.html">Templates</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <nav class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="web-invites.html">Web-Invites</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="products.html">Templates</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <!--a href="index.html" class="btn secondary back-btn">← Back</a-->
+    <h1>Turning Celebrations into<br>Timeless Memories</h1>
+  </section>
+
+  <section class="story-section">
+    <div class="story-content">
+      <div class="story-intro">
+        <h2>Our Story</h2>
+        <p>At Raaya, we believe every celebration is a story — and every story deserves to be told beautifully. We craft bespoke digital invitations that go beyond simple announcements, transforming them into immersive experiences your guests will remember.</p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">✨</div>
+          <h3>Elegance Meets Innovation</h3>
+          <p>Whether it's a wedding, engagement, birthday, or corporate event, our designs blend elegance with innovation. From carefully curated themes to interactive elements, every detail is tailored to reflect your personality.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">🎨</div>
+          <h3>Bespoke Design</h3>
+          <p>No two celebrations are alike, and neither are our invitations. Each design is crafted from scratch to capture the essence of your celebration and tell your unique story in the most beautiful way.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-icon">💫</div>
+          <h3>Memorable Experiences</h3>
+          <p>We don't just create invitations — we create the first impression of your event. Every element is designed to captivate, delight, and leave a lasting impression on your guests.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach-section">
+    <div class="approach-content">
+      <div class="approach-header">
+        <h2>Our Unique Approach</h2>
+        <p>Our unique approach means there's no need for bulky files or downloads. Instead, your guests receive a sleek, shareable web link that works instantly on any device — anywhere in the world. With us, your event begins the moment your invitation is opened.</p>
+      </div>
+
+      <div class="approach-features">
+        <div class="feature-item">
+          <div class="feature-number">01</div>
+          <h3>No Downloads Required</h3>
+          <p>Simple, elegant web links that open instantly on any device without any apps or downloads.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">02</div>
+          <h3>Globally Accessible</h3>
+          <p>Share your invitation with guests anywhere in the world — it works seamlessly across all devices and platforms.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">03</div>
+          <h3>Interactive Elements</h3>
+          <p>From RSVP forms to event maps and galleries, we create engaging experiences that go beyond static images.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">04</div>
+          <h3>Instant Updates</h3>
+          <p>Need to change details? We can update your invitation in real-time without resending anything.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">05</div>
+          <h3>Eco-Friendly</h3>
+          <p>Digital invitations mean zero waste, reduced carbon footprint, and a modern approach to celebrations.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-number">06</div>
+          <h3>Personal Touch</h3>
+          <p>Every design reflects your vision, personality, and the unique essence of your celebration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+  <h2>Ready to Create Magic?</h2>
+  <p>Let's craft an invitation that captures the essence of your celebration and leaves your guests amazed from the very first moment.</p>
+  <div class="cta-buttons">
+    <a href="products.html" class="btn primary">Digital Invitations</a>
+    <a href="web-invites.html" class="btn primary">Web Invitations</a>
+    <a href="contact.html" class="btn primary">Contact Us</a>
+  </div>
+</section>
+
+   <footer>© 2025 Creations by Raaya – Web-Invites & Digital Experiences</footer>
+
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const body = document.body;
+
+    function toggleMenu() {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
+      body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', toggleMenu);
+    });
+  </script>
+</body>
+</html>
