@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1011,7 +1012,7 @@
     <div class="spotlight-background"></div>
     <div class="spotlight-content">
       <div class="spotlight-header">
-        <span class="spotlight-badge">✨ Welcome To The Future of Digital Invitations</span>
+        <span class="spotlight-badge">✨ World's First Innovation!</span>
         <h2 class="spotlight-title">Experience the Magic of <br> Web-Invites</h2>
         
         <p class="spotlight-description">
@@ -1071,6 +1072,21 @@
           <h3>Lightning Fast</h3>
           <p>Optimized performance ensures your invites load instantly. No lag, no buffering, just pure elegance.</p>
         </div>
+      </div>
+
+      <!-- Pricing Section -->
+      <div style="text-align: center; margin: 40px 0 30px;">
+        <div class="price-tag" style="justify-content: center; margin-bottom: 20px;">
+          <span class="price-old" style="color: rgba(187, 187, 187, 0.8); text-decoration: line-through; font-size: 1.1rem;">₹2699/-</span>
+          <span class="price-new" style="color: var(--accent); font-size: 1.5rem; font-weight: 700;">₹1999/-</span>
+          <span class="save-badge" style="background: linear-gradient(135deg, var(--accent), #ffd700); color: #0a0015; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 700;">25% OFF</span>
+        </div>
+        <p style="color: rgba(255, 255, 255, 0.9); font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.6; margin: 0; font-weight: 500;">Inaugural Offer - Limited Time!</p>
+      </div>
+
+      <!-- Scroll for Demo -->
+      <div style="text-align: center; margin-bottom: 20px;">
+        <p style="color: rgba(255, 255, 255, 0.95); font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.6; margin: 0; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Scroll for demo ↓</p>
       </div>
     </div>
   </section>
@@ -1328,6 +1344,24 @@
   </footer>
 
   <script>
+    // Download Protection
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+      }
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+        e.preventDefault();
+      }
+    });
+
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuOverlay = document.querySelector('.menu-overlay');
