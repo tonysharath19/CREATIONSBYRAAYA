@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<!--  --><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Our Services – Creations by Raaya</title>
@@ -51,25 +51,13 @@
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #000000;
-    font-family: "Italianno", cursive;
-    white-space: nowrap;
+  .logo img {
+    height: 80px;
+    width: auto;
     transition: transform 0.3s ease;
   }
 
-  .logo img {
-    height: 50px;
-    width: auto;
-  }
-
-  .logo:hover {
+  .logo:hover img {
     transform: scale(1.05);
   }
 
@@ -769,20 +757,16 @@
   <div class="menu-overlay"></div>
 
   <header>
-    <a href="index.html" class="logo"><img src="Logo.jpg" alt="Logo"> Creations by Raaya</a>
+    <a href="index.html" class="logo"><img src="Logo.jpeg" alt="Logo"></a>
     <nav class="desktop-nav">
-      <a href="index.html">Home</a>
       <a href="aboutus.html">About</a>
-      <a href="web-invites.html">Web-Invites</a>
+      <a href="services.html">Services</a>
       <a href="gallery.html">Gallery</a>
+      <a href="web-invites.html">Web-Invites</a>
       <a href="products.html">Templates</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
   </header>
 
   <nav class="mobile-menu">
